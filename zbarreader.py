@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- conding: utf-8 -*-
 ########################
-#File Name:zt.py
+#File Name:zbarreader.py
 #Author:WmTiger
 #Mail:bfstiger@gmail.com
-#Created Time:2016-09-07 12:59:28
+#Created Time:2016-09-07 01:45:26
 ########################
 
 import picamera
@@ -19,11 +19,11 @@ def get_qr2():
     sc.parse_config("enable")
     with picamera.PiCamera() as c:
         data = []
-        c.resolution(640, 480)
+#        c.resolution(640, 480)
         c.start_preview()
-        time.sleep(0.1)
+        time.sleep(0.4)
         while 1:
-           if len(data) >= 2:
+            if len(data) >= 2:
                 break
             c.capture(s, format='jpeg')
             s.seek(0)
@@ -31,18 +31,23 @@ def get_qr2():
             w, h = pim.size
             raw = pim.tostring()
             zim = zbar.Image(w, h, 'Y800', raw)
-            sc.scan(zim) 
+            sc.scan(zim)
             for sb in zim:
                 data.append(sb.data)
             del(zim)
+            news_ids = []
+            for card in data:
+                if card not in news_ids:
+                    news_ids.append(card)
+            data = news_ids
         return data
-
+ 
 def getQR():
     stream = io.BytesIO()
     sc = zbar.ImageScanner()
     sc.parse_config("enable")
     with picamera.PiCamera() as c:
-#		c.resolution = (640, 480)
+#       c.resolution = (640, 480)
         c.start_preview()
         time.sleep(0.4)
         c.capture(stream, format='jpeg')
@@ -59,15 +64,5 @@ def getQR():
         return data
 
 if __name__ == '__main__':
-	data = get_qr2()
-"""	
-	while 1:
-		if len(data) >= 2:
-			break
-		data = getQR()
-	print data
-"""
-#	with picamera.PiCamera() as c2:
-#		c2.start_preview()
-#		time.sleep(0.2)
-#		c2.capture('card.jpg')
+    data = get_qr2()
+    print data
