@@ -10,12 +10,13 @@ from PIL import Image
 cmdfmt = {
 	# send to server cmd
 	1001 : ['ss', ''],		# login 
-	1002 : ['s', ''],			# send card
+	1002 : ['hs', ''],		# send card. h is step[0,1,2,3].
 	
 	# get from server cmd
 	2001 : ['h', 'loginHandler'],				# login result
 	2002 : ['h', 'sendCardHandler'],			# send card result
 	2003 : ['s', 'welcomeHandler'],				# welcome result
+	2004 : ['h', 'startDealCardHandler'],		# start deal, need send card info to server. h=0(hands), h=1(flop), h=2(turn), h=3(river).
 
 	3001 : ['2ishhhs', 'testHandler'],			# test
 	3003 : ['iis', 'imgtestHandler'],			# test
@@ -62,7 +63,10 @@ def sendMsg(s, cmdId, params):
 	s.sendall(msg)
 
 def loginHandler(s, re):
-#	print re
+	#arr = cmd_login.getData(re)
+	#sendMsg(s, 3003, arr)
+	print re[0], "0 is login faild, 1 is login success!"
+"""
 	print 'ready to use camera'
 	im = Image.open('img.jpg')
 	w,h = im.size
@@ -71,18 +75,26 @@ def loginHandler(s, re):
 	ls_f = base64.b64encode(f.read())
 	f.close()
 	sendMsg(s, 3003, [w,h,ls_f])
+"""
 
 def sendCardHandler(s, re):
-	print re
+	#print re
+	#cmd_sendCard.getData(re)
+	#sendMsg(s, 2002, arr)
+
+def startDealCardHandler(s, re):
+	print 'start deal, need decode qrcode and send info to server'
+	cmd_sendCard.dealCard(s, re)
 
 def testHandler(s, re):
 	print re
 
 def welcomeHandler(s, re):
-	print 'welcomeHandler'
+	print 'welcomeHandler: send login cmd to server'
 	sendMsg(s, 1001, ['smp4','wsm'])
 
 def imgtestHandler(s, re):
+"""
 	#print 're len:',len(re[2])
 	fh = open('test.jpg', 'wb')
 	str64 = re[2]
@@ -92,3 +104,4 @@ def imgtestHandler(s, re):
 	print len(data)
 #	fh.write(base64.b64decode(str64))
 	fh.close()
+"""
