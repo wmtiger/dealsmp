@@ -13,19 +13,19 @@ import conf
 
 def dealCard(s, re):
     print 'deal card'
-    if re[1] == 0:
+    if re[0] == 0:
         # hands
         print 'hands'
         arr = zbarreader.getHandQR()
-    elif re[1] == 1:
+    elif re[0] == 1:
         # flop
         print 'flop'
         arr = zbarreader.getFlopQR()
-    elif re[1] == 2:
+    elif re[0] == 2:
         # turn
         print 'turn'
         arr = zbarreader.getTurnQR()
-    elif re[1] == 3:
+    elif re[0] == 3:
         # river
         print 'river'
         arr = zbarreader.getRiverQR()

@@ -8,7 +8,7 @@
 ########################
 
 # mechine's position
-position = 2
+position = 3
 # sever host
 severhost = '192.168.31.247',
 #sever port
