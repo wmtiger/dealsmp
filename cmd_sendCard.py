@@ -33,6 +33,6 @@ def dealCard(s, re):
         print 'err'
         # err
         arr = []
-    cardinfo = ''.join(arr)
+    cardinfo = ','.join(arr)
     print cardinfo
-    cmdhandler.sendMsg(s, 1002, [conf.position, re[1], cardinfo])
+    cmdhandler.sendMsg(s, 1002, [conf.position, re[0], cardinfo])

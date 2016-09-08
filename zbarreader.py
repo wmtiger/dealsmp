@@ -13,7 +13,7 @@ import io
 import zbar
 from PIL import Image
 
-def scanQR(sleeptime):
+def scanQR(sleeptime=0.5):
     stream = io.BytesIO()
     sc = zbar.ImageScanner()
     sc.parse_config("enable")
@@ -38,9 +38,10 @@ def scanQR(sleeptime):
         for i in range(0, dataLen):
             if data[i] not in news_ids:
                 news_ids.append(data[i])
+        print news_ids
         return news_ids
 
-def getHandsQR(times=5):
+def getHandQR(times=5):
     n = times
     data = scanQR(0.4)
     while times > 0:
