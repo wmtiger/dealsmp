@@ -34,9 +34,10 @@ def scanQR(sleeptime):
         del(zim)
 
         news_ids = []
-        for card in data:
-            if card not in news_ids:
-                news_ids.append(card)
+        dataLen = len(data)
+        for i in range(0, dataLen):
+            if data[i] not in news_ids:
+                news_ids.append(data[i])
         return news_ids
 
 def getHandsQR(times=5):
