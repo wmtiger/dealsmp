@@ -15,7 +15,7 @@ from PIL import Image
 cmdfmt = {
     # send to server cmd
     1001 : ['ss', ''],      # login 
-    1002 : ['hs', ''],      # send card. h is step[0,1,2,3].
+    1002 : ['hhs', ''],      # send card [0]h is position, [1]h is step[0,1,2,3].
     
     # get from server cmd
     2001 : ['h', 'loginHandler'],               # login result
