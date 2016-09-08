@@ -61,8 +61,17 @@ def getQR():
         for sb in zim:
             data.append(sb.data)
         del(zim)
-        return data
+
+        news_ids = []
+        for card in data:
+            if card not in news_ids:
+                news_ids.append(card)
+        return news_ids
 
 if __name__ == '__main__':
-    data = get_qr2()
+    data = getQR()
+    while 1:
+        if len(data) >= 2:
+            break
+        data = getQR()
     print data
