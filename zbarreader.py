@@ -13,14 +13,14 @@ import io
 import zbar
 from PIL import Image
 
-def scanQR():
+def scanQR(sleeptime):
     stream = io.BytesIO()
     sc = zbar.ImageScanner()
     sc.parse_config("enable")
     with picamera.PiCamera() as c:
 #       c.resolution = (640, 480)
         c.start_preview()
-        time.sleep(0.4)
+        time.sleep(sleeptime)
         c.capture(stream, format='jpeg')
         stream.seek(0)
         pim = Image.open(stream).convert('L')
@@ -39,37 +39,52 @@ def scanQR():
                 news_ids.append(card)
         return news_ids
 
-def getHandsQR():
-    data = scanQR()
-    while 1:
+def getHandsQR(times=5):
+    n = times
+    data = scanQR(0.4)
+    while times > 0:
         if len(data) >= 2:
             break
-        data = scanQR()
+        data = scanQR(0.6)
+        times -= 1
+    print n - times
     return data
 
-def getFlopQR():
-    data = scanQR()
-    while 1:
+def getFlopQR(times=5):
+    n = times
+    data = scanQR(0.6)
+    while times > 0:
         if len(data) >= 3:
             break
-        data = scanQR()
+        data = scanQR(1)
+        times -= 1
+    print n - times
     return data
 
-def getTurnQR():
-    data = scanQR()
-    while 1:
+def getTurnQR(times=5):
+    n = times
+    data = scanQR(0.6)
+    while times > 0:
         if len(data) >= 4:
             break
-        data = scanQR()
+        data = scanQR(1)
+        times -= 1
+    print n - times
     return data
 
-def getRiverQR():
-    data = scanQR()
-    while 1:
+def getRiverQR(times=5):
+    n = times
+    data = scanQR(0.6)
+    while times > 0:
         if len(data) >= 5:
             break
-        data = scanQR()
+        data = scanQR(1)
+        times -= 1
+    print n - times
     return data
 
 if __name__ == '__main__':
-    print getQR()
+#    print getFlopQR()
+#    print getTurnQR()
+    print getRiverQR()
+#    print getHandsQR()
