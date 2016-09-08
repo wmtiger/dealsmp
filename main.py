@@ -11,6 +11,7 @@ import sys
 import socket
 import cmdhandler
 import struct
+import conf
 
 def main(host, port):
     print 'mian start', host, port
@@ -70,9 +71,10 @@ def cmdHandler(s, cmd, params):
 if __name__ == "__main__":
     if (len(sys.argv) < 3):
         print 'usage: python',sys.argv[0], 'host port'
-        host = '10.224.32.47'
+        
+        host = conf.severhost[0]
         #host = '192.168.2.116'
-        port = 9986
+        port = conf.severport[0]
         main(host, port)
     else:
     #   sys.exit()

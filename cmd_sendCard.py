@@ -1,42 +1,38 @@
 #!/usr/bin/env python
 # -*- conding: utf-8 -*-
 ########################
-#File Name:cmd_sendCard2.py
+#File Name:cmd_sendCard.py
 #Author:WmTiger
 #Mail:bfstiger@gmail.com
 #Created Time:2016-    09-07 10:46:06
 ########################
 
 import cmdhandler
-import picamera
-from PIL import Image
+import zbarreader
+import conf
 
 def dealCard(s, re):
     print 'deal card'
-    if re[0] == 0:
+    if re[1] == 0:
         # hands
         print 'hands'
-        arr = getCardInfo(re[0])
-    elif re[0] == 1:
+        arr = zbarreader.getHandQR()
+    elif re[1] == 1:
         # flop
         print 'flop'
-    elif re[0] == 2:
+        arr = zbarreader.getFlopQR()
+    elif re[1] == 2:
         # turn
         print 'turn'
-    elif re[3] == 3:
+        arr = zbarreader.getTurnQR()
+    elif re[1] == 3:
         # river
         print 'river'
+        arr = zbarreader.getRiverQR()
     else:
         print 'err'
         # err
-    cmdhandler.sendMsg(s, 1002, arr)
-
-def photoing():
-    print 'is photo'
-
-def analyzeQrcode():
-    print 'analyze qrcode'
-
-def getCardInfo(cardtype):
-    print 'get card info '
-    return [cardtype, 'ks,kc']
+        arr = []
+    cardinfo = ''.join(arr)
+    print cardinfo
+    cmdhandler.sendMsg(s, 1002, [conf.position, re[1], cardinfo])

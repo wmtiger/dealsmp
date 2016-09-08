@@ -8,13 +8,12 @@
 ########################
 
 import struct
-import base64
 import cmd_sendCard
-from PIL import Image
+import conf
 
 cmdfmt = {
     # send to server cmd
-    1001 : ['ss', ''],      # login 
+    1001 : ['hs', ''],      # login 
     1002 : ['hhs', ''],      # send card [0]h is position, [1]h is step[0,1,2,3].
     
     # get from server cmd
@@ -74,16 +73,6 @@ def loginHandler(s, re):
         print 'login faild'
     else:
         print 'login success'
-"""
-    print 'ready to use camera'
-    im = Image.open('img.jpg')
-    w,h = im.size
-    print w, h
-    f = open('img.jpg', 'rb')
-    ls_f = base64.b64encode(f.read())
-    f.close()
-    sendMsg(s, 3003, [w,h,ls_f])
-"""
 
 def sendCardHandler(s, re):
     print 'send card'
@@ -100,21 +89,10 @@ def testHandler(s, re):
 
 def welcomeHandler(s, re):
     print 'welcomeHandler: send login cmd to server'
-    sendMsg(s, 1001, ['smp1','wsm'])
+    sendMsg(s, 1001, [conf.position,'smp3'])
 
 def imgtestHandler(s, re):
     print ''
-"""
-    #print 're len:',len(re[2])
-    fh = open('test.jpg', 'wb')
-    str64 = re[2]
-#   print str64
-    data = bytes()
-    data+=base64.b64decode(str64)
-    print len(data)
-#   fh.write(base64.b64decode(str64))
-    fh.close()
-"""
 
 if __name__ == '__main__':
     print 'test'
