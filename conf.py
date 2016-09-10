@@ -9,7 +9,9 @@
 
 # mechine's position
 position = 3
-# sever host
+# server host
 severhost = '192.168.31.247',
-#sever port
+# server port
 severport = 9986,
+# name
+name = 'smp4'

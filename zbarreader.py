@@ -41,7 +41,7 @@ def scanQR(sleeptime=0.5):
         print news_ids
         return news_ids
 
-def getHandQR(times=5):
+def getHandQR(times=50):
     n = times
     data = scanQR(0.4)
     while times > 0:
@@ -52,7 +52,7 @@ def getHandQR(times=5):
     print n - times
     return data
 
-def getFlopQR(times=5):
+def getFlopQR(times=50):
     n = times
     data = scanQR(0.6)
     while times > 0:
@@ -63,7 +63,7 @@ def getFlopQR(times=5):
     print n - times
     return data
 
-def getTurnQR(times=5):
+def getTurnQR(times=50):
     n = times
     data = scanQR(0.6)
     while times > 0:
@@ -74,7 +74,7 @@ def getTurnQR(times=5):
     print n - times
     return data
 
-def getRiverQR(times=5):
+def getRiverQR(times=50):
     n = times
     data = scanQR(0.6)
     while times > 0:
