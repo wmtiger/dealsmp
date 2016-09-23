@@ -90,7 +90,7 @@ def testHandler(s, re):
 
 def welcomeHandler(s, re):
     print 'welcomeHandler: send login cmd to server'
-    sendMsg(s, 1001, [conf.position,'smp3'])
+    sendMsg(s, 1001, [conf.position,conf.name])
 
 def imgtestHandler(s, re):
     print ''
