@@ -66,7 +66,7 @@ def getFlopQR(times=50):
     while times > 0:
         if len(data) >= 3:
             break
-    data = scanQR(1)
+        data = scanQR(1)
         times -= 1
     print n - times
     return data
