@@ -10,18 +10,21 @@
 import struct
 import cmd_sendCard
 import conf
+import globalvar
 
 cmdfmt = {
     # send to server cmd
     1001 : ['hs', ''],      # login 
     1002 : ['hhs', ''],      # send card [0]h is position, [1]h is step[0,1,2,3].
     1003 : ['h', ''],      # send card err.
+    1010 : ['h', ''],      # send heart beat.
     
     # get from server cmd
     2001 : ['h', 'loginHandler'],               # login result
     2002 : ['h', 'sendCardHandler'],            # send card result
     2003 : ['s', 'welcomeHandler'],             # welcome result
     2004 : ['h', 'startDealCardHandler'],       # start deal, need send card info to server. h=0(hands), h=1(flop), h=2(turn), h=3(river).
+    2010 : ['h', 'heartBeatHandler'],             # heart beat result
 
     3001 : ['2ishhhs', 'testHandler'],          # test
     3003 : ['iis', 'imgtestHandler'],           # test
@@ -95,5 +98,9 @@ def welcomeHandler(s, re):
 def imgtestHandler(s, re):
     print ''
 
+def heartBeatHandler(s, re):
+    print 'get server heart back'
+    globalvar.needReconnect = 0
+
 if __name__ == '__main__':
-    print 'test'
+    print heartBeatHandler('s', [1])

@@ -8,10 +8,10 @@
 ########################
 
 # mechine's position
-position = 3
+position = 0
 # server host
 severhost = '192.168.31.247',
 # server port
 severport = 9986,
 # name
-name = 'smp4'
+name = 'smp1'

@@ -12,25 +12,42 @@ import socket
 import cmdhandler
 import struct
 import conf
+import threading
+import globalvar
+
+s = socket.socket()
+
+def sendHeartBeat():
+    print 'send heart beat'
+    cmdhandler.sendMsg(s, 1010, [1])
+    global t
+    t = threading.Timer(3.0, sendHeartBeat)
+    print t.enumerate()
+    t.start()
+t = threading.Timer(3.0, sendHeartBeat)
 
 def main(host, port):
     print 'mian start', host, port
     databuf = bytes()
     BUFSIZE = 4096
     HEADSIZE = 8    # len: 4, cmd: 2, fmtlen: 2
-
-    s = socket.socket()
+    global s
+    #s = socket.socket()
     connre = s.connect_ex((host,port))
     while 1:
         if connre == 0:
             break
         else:
             connre = s.connect_ex((host, port))
-    
+    global t
+    t.start()
     #print 'Usage: cmd, [p1,...]'
     while 1:
     #   cmdandparams = raw_input('input cmd and params:')
     #   print cmdandparams
+        if globalvar.needReconnect == 1:
+            main()
+            return
         temp = s.recv(BUFSIZE)
         if temp:
             databuf += temp
@@ -49,10 +66,10 @@ def main(host, port):
                 body = databuf[HEADSIZE+fmtsize:HEADSIZE+bodysize]
                 bodypack = struct.unpack('<'+fmt,body)
 #               print 'bodypack',bodypack
-                cmdHandler(s, cmdId, bodypack)
+                callCmdHandler(s, cmdId, bodypack)
                 databuf = databuf[HEADSIZE+bodysize:]
 
-def cmdHandler(s, cmd, params):
+def callCmdHandler(s, cmd, params):
 #   print cmd, params
     if (cmd not in cmdhandler.cmdfmt):
         print cmd, 'not in cmdhander.cmdfmt'
