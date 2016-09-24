@@ -27,7 +27,7 @@ def scanQR(sleeptime=0.5,type = 0):
  #       pim.save("t1.jpg")
         w, h = pim.size
         if type == 0:
-            box = (w/5,h/10,w/3 * 2, h/10)
+            box = (w/5,0,w/4 * 3, h)
         else:
             box = (w/4,h/8,w/4 * 3, h/2)
         cpim = pim.crop(box)
@@ -97,5 +97,5 @@ if __name__ == '__main__':
 #    print getFlopQR()
 #    print getTurnQR()
     print getRiverQR()
-#    print getHandsQR()
+#    print getHandQR()
 
