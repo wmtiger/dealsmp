@@ -20,6 +20,7 @@ cmdfmt = {
     2002 : ['h', 'sendCardHandler'],            # send card result
     2003 : ['s', 'welcomeHandler'],             # welcome result
     2004 : ['h', 'startDealCardHandler'],       # start deal, need send card info to server. h=0(hands), h=1(flop), h=2(turn), h=3(river).
+    2010 : ['h', 'killKeepHandle'],             # need kill keep shell
 
 }
 

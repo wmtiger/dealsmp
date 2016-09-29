@@ -14,6 +14,7 @@ import struct
 import cmdhandler
 import conf
 import zbarreader
+import os
 
 class DealerClient(asyncore.dispatcher):
 
@@ -136,6 +137,11 @@ class DealerClient(asyncore.dispatcher):
         else:
             print 'login success'
 
+    def killKeepHandle(self, re):
+        val = os.system("sh /home/pi/work/dealsmp/killkeep.sh")
+        print 'kill state =', val
+
 if __name__ == "__main__":
-    dealer = DealerClient('192.168.31.247', 9986)
+    print conf.severhost, conf.severport
+    dealer = DealerClient(conf.severhost[0], conf.severport[0])
     asyncore.loop()

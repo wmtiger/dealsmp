@@ -14,4 +14,4 @@ severhost = '192.168.31.247',
 # server port
 severport = 9986,
 # name
-name = 'smp1'
+name = 'smp0'

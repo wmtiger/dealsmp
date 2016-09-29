@@ -1,5 +1,7 @@
 #!/bin/bash
+#Usage: nohup sh keep.sh &
 echo $$ > pid
+echo "" > nohup.out
 
 prog=dealerclient.py
 num=0
