@@ -7,6 +7,7 @@
 #Created Time:2016-09-29 20:17:58
 ########################
 
+import time
 import zbar
 from PIL import Image
 
@@ -66,7 +67,9 @@ def scanImg(type, url = 'test.jpg'):
             data.append(scanLeft(sc, im, type)[0])
             data.append(scanMiddle(sc, im, type)[0])
             data.append(scanRight(sc, im, type)[0])
-        return data
+    return data
 
 if __name__ == '__main__':
+    t = time.time()
     print scanImg(0)
+    print time.time() - t
