@@ -18,7 +18,10 @@ def scanQR(sleeptime=0.5,type = 0):
     sc = zbar.ImageScanner()
     sc.parse_config("enable")
     with picamera.PiCamera() as c:
-        c.resolution = (2560, 1440)
+        if type == 0:
+            c.resolution = (800,600)
+        else:
+            c.resolution = (2560, 1440)
         c.start_preview()
         time.sleep(sleeptime)
         c.capture(stream, format='jpeg')
@@ -47,8 +50,8 @@ def scanQR(sleeptime=0.5,type = 0):
         for i in range(0, dataLen):
             if data[i] not in news_ids:
                 news_ids.append(data[i])
-        print news_ids
-        return news_ids
+    print news_ids
+    return news_ids
 
 def getHandQR(times=50):
     n = times
@@ -95,8 +98,10 @@ def getRiverQR(times=50):
     return data
 
 if __name__ == '__main__':
+    t = time.time()
 #    print getFlopQR()
 #    print getTurnQR()
 #    print getRiverQR()
     print getHandQR()
+    print time.time() - t
 
