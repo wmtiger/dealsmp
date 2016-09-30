@@ -21,7 +21,7 @@ def scanQR(sleeptime=0.5,type = 0):
         if type == 0:
             c.resolution = (800,600)
         else:
-            c.resolution = (2560, 1440)
+            c.resolution = (2400, 1800)
         c.start_preview()
         time.sleep(sleeptime)
         c.capture(stream, format='jpeg')
