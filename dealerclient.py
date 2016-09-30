@@ -15,6 +15,7 @@ import cmdhandler
 import conf
 import zbarreader
 import os
+import sys
 
 class DealerClient(asyncore.dispatcher):
 
@@ -142,6 +143,9 @@ class DealerClient(asyncore.dispatcher):
         print 'kill state =', val
 
 if __name__ == "__main__":
-    print conf.severhost, conf.severport
-    dealer = DealerClient(conf.severhost[0], conf.severport[0])
+    host = conf.severhost[0]
+    if len(sys.argv) > 1:
+        host = sys.argv[1]
+    print host
+    dealer = DealerClient(host, conf.severport[0])
     asyncore.loop()

@@ -15,5 +15,5 @@ while read line; do
     elif [ "$line"x = "$a"x ]; then
         echo "no pid was run!"
     fi
-done < pid
+done < pid.log
 
