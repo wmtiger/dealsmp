@@ -90,16 +90,16 @@ def scanQR(sleeptime=0.5,type = 0):
                 cutLeft = w/4
                 cutRight = w/4*3
                 cutTop = 0
-                cutBottom = h/2-h/5
+                cutBottom = h/2-h/4
                 box = (cutLeft,cutTop,cutRight, cutBottom)
                 ggpim = pim.crop(box)
-                ggpim.save('ggp.jpg')
+                #ggpim.save('ggp.jpg')
                 if type == 1:
                     box = (cutLeft,cutTop,cutRight-((cutRight-cutLeft)/5*2), cutBottom)
                     cpim = pim.crop(box)
-                    lfarr = scanLeft(sc, pim, type)
-                    mdarr = scanMiddle(sc, pim, type)
-                    rgarr = scanRight(sc, pim, type)
+                    lfarr = scanLeft(sc, cpim, type)
+                    mdarr = scanMiddle(sc, cpim, type)
+                    rgarr = scanRight(sc, cpim, type)
                     if len(lfarr) > 0:
                         cards.append(lfarr[0])
                     if len(mdarr) > 0:
