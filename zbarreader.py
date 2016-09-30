@@ -87,6 +87,7 @@ def scanQR(sleeptime=0.5,type = 0):
                 cutRight = w/4*3
                 cutTop = h/8
                 cutBottom = h/2
+                box = (cutLeft,cutTop,cutRight, cutBottom)
                 ggpim = pim.crop(box)
                 ggpim.save('ggp.jpg')
                 if type == 1:
@@ -95,14 +96,8 @@ def scanQR(sleeptime=0.5,type = 0):
                     cards.append(scanLeft(sc, cpim, type)[0])
                     cards.append(scanMiddle(sc, cpim, type)[0])
                     cards.append(scanRight(sc, cpim, type)[0])
-                elif type == 2:
-                    box = (cutLeft+((cutRight-cutLeft)/5*3),cutTop,cutRight, cutBottom)
-                    cpim = pim.crop(box)
-                    cards.append(scanLeft(sc, cpim, type)[0])
-                elif type == 3:
-                    box = (cutLeft+((cutRight-cutLeft)/5*3),cutTop,cutRight, cutBottom)
-                    cpim = pim.crop(box)
-                    cards.append(scanRight(sc, cpim, type)[0])
+                else:
+                    cards = readQR(box,sc,ggpim,type,'')
 
 #        cpim.save("test1.jpg")
     #        cw, ch = cpim.size
