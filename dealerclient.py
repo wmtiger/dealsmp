@@ -129,7 +129,7 @@ class DealerClient(asyncore.dispatcher):
             print 'send card faild'
 
     def welcomeHandler(self, re):
-        self.buf = cmdhandler.pack(1001, [conf.position,conf.name])
+        self.buf = cmdhandler.pack(1001, [conf.position,conf.name+str(conf.position)])
 
     def loginHandler(self, re):
         if re[0] == 0:
