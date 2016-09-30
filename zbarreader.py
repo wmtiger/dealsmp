@@ -106,7 +106,10 @@ def scanQR(sleeptime=0.5,type = 0):
                         cards.append(mdarr[0])
                     if len(rgarr) > 0:
                         cards.append(rgarr[0])
-                else:
+                elif type == 2:
+                    box = (0,0,ggpim.size[0]/5*4,ggpim.size[1])
+                    cards = readQR(box,sc,ggpim,type,'')
+                elif type == 3:
                     box = (0,0,ggpim.size[0],ggpim.size[1])
                     cards = readQR(box,sc,ggpim,type,'')
 
