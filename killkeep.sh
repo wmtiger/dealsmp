@@ -11,7 +11,7 @@ while read line; do
     if [ "$line"x != "$a"x ]; then
         echo $line "will killed!"
         kill -9 $line
-        echo '' > pid
+        echo '' > pid.log
     elif [ "$line"x = "$a"x ]; then
         echo "no pid was run!"
     fi
