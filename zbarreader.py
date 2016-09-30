@@ -46,7 +46,7 @@ def scanRight(sc, im, type):
 def readQR(box, sc, im, type, name):
     temp = ("hand", "flop", "turn", "river")
     lfim = im.crop(box)
-    lfim.save(temp[type]+"_"+name+".jpg")
+    #lfim.save(temp[type]+"_"+name+".jpg")
     iw,ih = lfim.size
     lfraw = lfim.tostring()
     lfzim = zbar.Image(iw,ih,'Y800',lfraw)
@@ -110,15 +110,6 @@ def scanQR(sleeptime=0.5,type = 0):
                     box = (0,0,ggpim.size[0],ggpim.size[1])
                     cards = readQR(box,sc,ggpim,type,'')
 
-#        cpim.save("test1.jpg")
-    #        cw, ch = cpim.size
-    #        raw = cpim.tostring()
-    #        zim = zbar.Image(cw, ch,'Y800', raw)
-    #        sc.scan(zim)
-    #        data = []
-    #        for sb in zim:
-    #            data.append(sb.data)
-    #        del(zim)
     print cards
     return cards
 
