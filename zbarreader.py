@@ -80,8 +80,12 @@ def scanQR(sleeptime=0.5,type = 0):
             if type == 0:
 #                box = (0,0,w, h)
                 pim.save('hand.jpg')
-                cards.append(scanLeft(sc, pim, type)[0])
-                cards.append(scanRight(sc, pim, type)[0])
+                lfarr = scanLeft(sc, pim, type)
+                rgarr = scanRight(sc, pim, type)
+                if len(lfarr) > 0:
+                    cards.append(lfarr[0])
+                if len(rgarr) > 0:
+                    cards.append(rgarr[0])
             else:
                 cutLeft = w/4
                 cutRight = w/4*3
@@ -93,9 +97,15 @@ def scanQR(sleeptime=0.5,type = 0):
                 if type == 1:
                     box = (cutLeft,cutTop,cutRight-((cutRight-cutLeft)/5*2), cutBottom)
                     cpim = pim.crop(box)
-                    cards.append(scanLeft(sc, cpim, type)[0])
-                    cards.append(scanMiddle(sc, cpim, type)[0])
-                    cards.append(scanRight(sc, cpim, type)[0])
+                    lfarr = scanLeft(sc, pim, type)
+                    mdarr = scanMiddle(sc, pim, type)
+                    rgarr = scanRight(sc, pim, type)
+                    if len(lfarr) > 0:
+                        cards.append(lfarr[0])
+                    if len(mdarr) > 0:
+                        cards.append(mdarr[0])
+                    if len(rgarr) > 0:
+                        cards.append(rgarr[0])
                 else:
                     cards = readQR(box,sc,ggpim,type,'')
 
