@@ -90,7 +90,7 @@ def scanQR(sleeptime=0.5,type = 0):
                 cutLeft = w/4
                 cutRight = w/4*3
                 cutTop = 0
-                cutBottom = h/2+h/5
+                cutBottom = h/2-h/5
                 box = (cutLeft,cutTop,cutRight, cutBottom)
                 ggpim = pim.crop(box)
                 ggpim.save('ggp.jpg')
