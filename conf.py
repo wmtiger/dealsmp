@@ -14,4 +14,8 @@ severhost = '192.168.31.247',
 # server port
 severport = 9986,
 # name
-name = 'smp0'
+name = 'smp'
+
+if __name__ == '__main__':
+    val = name + str(position)
+    print val
