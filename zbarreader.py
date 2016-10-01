@@ -133,7 +133,7 @@ def getFlopQR(times=50):
     while times > 0:
         if len(data) >= 3:
             break
-        data = scanQR(1)
+        data = scanQR(0.6,1)
         times -= 1
     print n - times
     return data
@@ -144,7 +144,7 @@ def getTurnQR(times=50):
     while times > 0:
         if len(data) >= 4:
             break
-        data = scanQR(1)
+        data = scanQR(0.6,2)
         times -= 1
     print n - times
     return data
@@ -155,7 +155,7 @@ def getRiverQR(times=50):
     while times > 0:
         if len(data) >= 5:
             break
-        data = scanQR(1)
+        data = scanQR(0.6,3)
         times -= 1
     print n - times
     return data
